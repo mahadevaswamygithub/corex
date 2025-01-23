@@ -1,0 +1,42 @@
+.activity-log-container {
+    padding: 20px;
+    max-width: 900px;
+    margin: 0 auto;
+}
+
+h2 {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.activity-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+.activity-table th,
+.activity-table td {
+    padding: 12px 15px;
+    text-align: left;
+    border: 1px solid #ddd;
+}
+
+.activity-table th {
+    background-color: #4CAF50;
+    color: white;
+}
+
+.activity-table tr:nth-child(even) {
+    background-color: #f9f9f9;
+}
+
+.activity-table tr:hover {
+    background-color: #f1f1f1;
+}
+
+.error {
+    color: red;
+    font-size: 14px;
+    text-align: center;
+}
