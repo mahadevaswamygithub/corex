@@ -1,0 +1,77 @@
+/* global.css */
+
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f4f4f4;
+}
+
+.layout {
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+}
+
+.header {
+    background-color: #333;
+    color: white;
+    padding: 10px 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.header .logo {
+    font-size: 24px;
+    font-weight: bold;
+}
+
+.header nav a {
+    color: white;
+    margin: 0 10px;
+    text-decoration: none;
+}
+
+.sidebar {
+    width: 250px;
+    background-color: #333;
+    color: white;
+    height: 100%;
+    padding: 20px;
+    position: fixed;
+}
+
+.sidebar ul {
+    list-style: none;
+    padding: 0;
+}
+
+.sidebar ul li {
+    margin: 15px 0;
+}
+
+.sidebar ul li a {
+    color: white;
+    text-decoration: none;
+}
+
+.main-content {
+    display: flex;
+    margin-left: 250px;
+}
+
+.content {
+    padding: 20px;
+    flex-grow: 1;
+}
+
+.footer {
+    background-color: #333;
+    color: white;
+    text-align: center;
+    padding: 10px 0;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+}
