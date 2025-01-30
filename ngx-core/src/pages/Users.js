@@ -25,7 +25,7 @@ const Users = () => {
 
     return (
         <div className="users-container">
-            <h2>Users</h2>
+            <h2>Users List</h2>
             {error && <p className="error">{error}</p>}
             <table className="users-table">
                 <thead>

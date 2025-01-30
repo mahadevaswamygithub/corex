@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faUserCircle } from '@fortawesome/free-solid-svg-icons';
 import '../styles/header.css';
 
 const Header = () => {
@@ -29,16 +31,21 @@ const Header = () => {
 
     return (
         <header className="header">
-            <h2>Dashboard</h2>
+            <h2>CoreX</h2>
             {error && <p className="error">{error}</p>}
             <div className="user-info">
                 {user ? (
                     <>
-                        <img
-                            src={user.profile_picture || 'default-user-icon.png'}
-                            alt="User Icon"
-                            onClick={toggleDropdown}
-                        />
+                        <div className="user-icon" onClick={toggleDropdown}>
+                            {user.profile_picture ? (
+                                <img
+                                    src={user.profile_picture}
+                                    alt="User Profile"
+                                />
+                            ) : (
+                                <FontAwesomeIcon icon={faUserCircle} size="2x" />
+                            )}
+                        </div>
                         <div className={`dropdown ${isDropdownOpen ? 'show' : ''}`}>
                             <span><strong>Username:</strong> {user.username}</span>
                             <span><strong>Email:</strong> {user.email}</span>

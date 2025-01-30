@@ -9,11 +9,13 @@ const UserDetails = () => {
     const [user, setUser] = useState(null);
     const [error, setError] = useState('');
     const [isActive, setIsActive] = useState(false);
+    const [isLoading, setIsLoading] = useState(false);
     const token = localStorage.getItem('token');
 
     // Fetch user details
     useEffect(() => {
         if (id) {
+            setIsLoading(true);
             axios
                 .get(`http://127.0.0.1:8000/app/users/${id}/`, {
                     headers: { Authorization: `Bearer ${token}` },
@@ -22,7 +24,8 @@ const UserDetails = () => {
                     setUser(response.data);
                     setIsActive(response.data.is_active);
                 })
-                .catch((err) => setError('Failed to fetch user details.'));
+                .catch((err) => setError('Failed to fetch user details.'))
+                .finally(() => setIsLoading(false));
         }
     }, [id, token]);
 
@@ -39,6 +42,7 @@ const UserDetails = () => {
 
     // Update user details
     const handleUpdateUser = () => {
+        setIsLoading(true);
         axios
             .put(
                 `http://127.0.0.1:8000/app/users/${id}/`,
@@ -48,59 +52,78 @@ const UserDetails = () => {
             .then(() => {
                 navigate('/home/users');
             })
-            .catch((err) => setError('Failed to update user.'));
+            .catch((err) => setError('Failed to update user.'))
+            .finally(() => setIsLoading(false));
     };
 
     // Handle delete user
     const handleDeleteUser = () => {
-        axios
-            .delete(`http://127.0.0.1:8000/app/users/${id}/`, {
-                headers: { Authorization: `Bearer ${token}` },
-            })
-            .then(() => {
-                navigate('/home/users');
-            })
-            .catch((err) => setError('Failed to delete user.'));
+        const confirmDelete = window.confirm('Are you sure you want to delete this user?');
+        if (confirmDelete) {
+            setIsLoading(true);
+            axios
+                .delete(`http://127.0.0.1:8000/app/users/${id}/`, {
+                    headers: { Authorization: `Bearer ${token}` },
+                })
+                .then(() => {
+                    navigate('/home/users');
+                })
+                .catch((err) => setError('Failed to delete user.'))
+                .finally(() => setIsLoading(false));
+        }
     };
 
     return (
         <div className="user-details-container">
             <h2>User Details</h2>
-            {error && <p className="error">{error}</p>}
-            {user && (
-                <div>
-                    <div className="user-detail">
-                        <label>Username:</label>
-                        <input
-                            type="text"
-                            name="username"
-                            value={user.username}
-                            onChange={handleInputChange}
-                        />
+            {error && <p className="error-message">{error}</p>}
+            {isLoading ? (
+                <div className="loading-spinner"></div>
+            ) : (
+                user && (
+                    <div className="user-details-form">
+                        <div className="form-group">
+                            <label>Username:</label>
+                            <input
+                                type="text"
+                                name="username"
+                                value={user.username}
+                                onChange={handleInputChange}
+                                className="form-input"
+                            />
+                        </div>
+                        <div className="form-group">
+                            <label>Email:</label>
+                            <input
+                                type="email"
+                                name="email"
+                                value={user.email}
+                                onChange={handleInputChange}
+                                className="form-input"
+                            />
+                        </div>
+                        <div className="form-group">
+                            <label>Is Active:</label>
+                            <input
+                                type="checkbox"
+                                checked={isActive}
+                                onChange={handleToggleActive}
+                                className="form-checkbox"
+                            />
+                        </div>
+                        <div className="buttons">
+                            <button onClick={handleUpdateUser} className="btn-update">
+                                Update
+                            </button>
+                            <button onClick={handleDeleteUser} className="btn-delete">
+                                Delete
+                            </button>
+                            <button onClick={() => navigate('/home/users')} className="btn-back">
+                                Back to User List
+                            </button>
+                        </div>
                     </div>
-                    <div className="user-detail">
-                        <label>Email:</label>
-                        <input
-                            type="email"
-                            name="email"
-                            value={user.email}
-                            onChange={handleInputChange}
-                        />
-                    </div>
-                    <div className="user-detail">
-                        <label>Is Active:</label>
-                        <input
-                            type="checkbox"
-                            checked={isActive}
-                            onChange={handleToggleActive}
-                        />
-                    </div>
-                    <div className="buttons">
-                        <button onClick={handleUpdateUser}>Update</button>
-                        <button onClick={handleDeleteUser}>Delete</button>
-                        <button onClick={() => navigate('/home/users')}>Back to User List</button>
-                    </div>
-                </div>
+                )
             )}
         </div>
     );

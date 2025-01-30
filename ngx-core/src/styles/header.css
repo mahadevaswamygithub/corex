@@ -1,7 +1,7 @@
 .header {
-    background-color: #87CEEB; /* Light Sky Blue (lighter shade) */
+    background-color: #6e7a7e; 
     color: white;
-    padding: 10px 20px; /* Reduce padding for a more compact header */
+    padding: 11px 20px; 
     font-size: 1.2rem;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
     width: 100%;

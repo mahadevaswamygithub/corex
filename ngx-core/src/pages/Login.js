@@ -1,5 +1,7 @@
+// pages/Login.js
 import React, { useState } from 'react';
-import axios from 'axios';
+import api from '../utils/api';
+import { getTokenExpiryTime } from '../utils/auth';
 import '../styles/login.css';
 
 const Login = () => {
@@ -12,10 +14,18 @@ const Login = () => {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        axios
-            .post('http://127.0.0.1:8000/api/token/', { username, password })
+        api
+            .post('token/', { username, password })
             .then((response) => {
                 localStorage.setItem('token', response.data.access);
+                const expiryTime = getTokenExpiryTime(response.data.access);
+                if (expiryTime) {
+                    const timeUntilExpiry = expiryTime - Date.now();
+                    setTimeout(() => {
+                        localStorage.removeItem('token');
+                        window.location.href = '/';
+                    }, timeUntilExpiry);
+                }
                 window.location.href = '/home';
             })
             .catch(() => setError('Invalid credentials. Please try again.'));

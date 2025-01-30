@@ -1,3 +1,5 @@
 cp db.sqlite3 db_backup.sqlite3
 
 npm install jwt-decode
+
+npm install --save @fortawesome/react-fontawesome @fortawesome/free-solid-svg-icons

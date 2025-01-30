@@ -14,11 +14,12 @@
     width: 60px; /* Narrow width when closed */
 }
 
+
 .sidebar-header {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-bottom: 20px;
+    margin-bottom: 10px;
 }
 
 .toggle-btn {

@@ -42,52 +42,58 @@ const ActivityLog = () => {
     return (
         <div className="activity-log-container">
             <h2>Activity Log</h2>
-            {error && <p className="error">{error}</p>}
-            {loading && <p>Loading...</p>}
-
-            <table className="activity-table">
-                <thead>
-                    <tr>
-                        <th>#</th>
-                        <th>Action</th>
-                        <th>Model</th>
-                        <th>Timestamp</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {logs.length > 0 ? (
-                        logs.map((log, index) => (
-                            <tr key={log.id}>
-                                <td>{index + 1 + (currentPage - 1) * 10}</td>
-                                <td>{log.action}</td>
-                                <td>{log.model_name}</td>
-                                <td>{new Date(log.timestamp).toLocaleString()}</td>
+            {error && <p className="error-message">{error}</p>}
+            {loading ? (
+                <div className="loading-spinner"></div>
+            ) : (
+                <>
+                    <table className="activity-table">
+                        <thead>
+                            <tr>
+                                <th>Serial</th>
+                                <th>Action</th>
+                                <th>Model</th>
+                                <th>Timestamp</th>
                             </tr>
-                        ))
-                    ) : (
-                        <tr>
-                            <td colSpan="4" style={{ textAlign: 'center' }}>No logs found.</td>
-                        </tr>
-                    )}
-                </tbody>
-            </table>
+                        </thead>
+                        <tbody>
+                            {logs.length > 0 ? (
+                                logs.map((log, index) => (
+                                    <tr key={log.id}>
+                                        <td>{index + 1 + (currentPage - 1) * 10}</td>
+                                        <td>{log.action}</td>
+                                        <td>{log.model_name}</td>
+                                        <td>{new Date(log.timestamp).toLocaleString()}</td>
+                                    </tr>
+                                ))
+                            ) : (
+                                <tr>
+                                    <td colSpan="4" className="no-logs-message">No logs found.</td>
+                                </tr>
+                            )}
+                        </tbody>
+                    </table>
 
-            {/* Pagination Controls */}
-            <div className="pagination">
-                <button 
-                    onClick={() => fetchLogs(currentPage - 1)} 
-                    disabled={!prevPage}
-                >
-                    Previous
-                </button>
-                <span>Page {currentPage}</span>
-                <button 
-                    onClick={() => fetchLogs(currentPage + 1)} 
-                    disabled={!nextPage}
-                >
-                    Next
-                </button>
-            </div>
+                    {/* Pagination Controls */}
+                    <div className="pagination">
+                        <button 
+                            onClick={() => fetchLogs(currentPage - 1)} 
+                            disabled={!prevPage || loading}
+                            className="pagination-button"
+                        >
+                            Previous
+                        </button>
+                        <span className="page-indicator">Page {currentPage}</span>
+                        <button 
+                            onClick={() => fetchLogs(currentPage + 1)} 
+                            disabled={!nextPage || loading}
+                            className="pagination-button"
+                        >
+                            Next
+                        </button>
+                    </div>
+                </>
+            )}
         </div>
     );
 };

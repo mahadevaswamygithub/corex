@@ -1,7 +1,5 @@
-/* Updated CSS for a more user-friendly and nice design */
-
 .users-container {
-    padding: 20px;
+    padding: 40px; /* Increased padding */
     max-width: 1200px;
     margin: 0 auto;
     font-family: 'Arial', sans-serif;
@@ -10,30 +8,31 @@
 .users-container h2 {
     text-align: center;
     color: #333;
-    margin-bottom: 20px;
-    font-size: 2rem;
+    margin-bottom: 10px; /* Increased margin-bottom */
+    font-size: 2rem; /* Increased font size */
 }
 
 .error {
     color: #ff4d4d;
     text-align: center;
-    margin-bottom: 20px;
+    margin-bottom: 30px; /* Increased margin-bottom */
     font-weight: bold;
 }
 
 .users-table {
     width: 100%;
     border-collapse: collapse;
-    margin-bottom: 20px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    margin-bottom: 30px; /* Increased margin-bottom */
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
     border-radius: 8px;
     overflow: hidden;
 }
 
 .users-table th, .users-table td {
-    padding: 12px 15px;
+    padding: 20px 25px; /* Increased padding */
     text-align: left;
     border-bottom: 1px solid #ddd;
+    font-size: 1.2rem; /* Increased font size */
 }
 
 .users-table th {
@@ -54,10 +53,11 @@
     background-color: #007bff;
     color: white;
     border: none;
-    padding: 8px 12px;
-    border-radius: 4px;
+    padding: 12px 18px; /* Increased button size */
+    border-radius: 6px; /* Slightly larger border radius */
     cursor: pointer;
     transition: background-color 0.3s ease;
+    font-size: 1rem; /* Increased button font size */
 }
 
 .users-table td button:hover {
@@ -68,18 +68,20 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    gap: 10px;
-    margin-top: 20px;
+    gap: 15px; /* Increased gap between pagination buttons */
+    margin-top: 30px; /* Increased margin-top */
 }
 
 .pagination button {
-    padding: 8px 16px;
+    width: 10% ;
+    padding: 12px 24px; /* Increased button size */
     background-color: #007bff;
     color: white;
     border: none;
-    border-radius: 4px;
+    border-radius: 6px; /* Slightly larger border radius */
     cursor: pointer;
     transition: background-color 0.3s ease;
+    font-size: 1.1rem; /* Increased font size */
 }
 
 .pagination button:disabled {
@@ -92,6 +94,6 @@
 }
 
 .pagination span {
-    font-size: 1rem;
+    font-size: 1.2rem; /* Increased font size */
     color: #333;
 }
