@@ -97,3 +97,31 @@
     font-size: 1.2rem; /* Increased font size */
     color: #333;
 }
+
+.users-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.add-user-btn {
+    width: 10%;
+    padding: 8px 15px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+.add-user-btn:hover {
+    background-color: #0056b3;
+}
+
+.users-table button {
+    padding: 5px 10px; 
+    font-size: 14px; 
+    width: 50%; 
+}
+

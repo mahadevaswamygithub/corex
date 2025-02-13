@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import '../styles/users.css';
 
@@ -8,6 +8,7 @@ const Users = () => {
     const [error, setError] = useState('');
     const [page, setPage] = useState(1);
     const [totalPages, setTotalPages] = useState(1);
+    const navigate = useNavigate();
     const token = localStorage.getItem('token');
 
     // Fetch users with pagination
@@ -20,13 +21,18 @@ const Users = () => {
                 setUsers(response.data.results);
                 setTotalPages(Math.ceil(response.data.count / 10)); // Assuming 10 users per page
             })
-            .catch((err) => setError('Failed to fetch users.'));
+            .catch(() => setError('Failed to fetch users.'));
     }, [page, token]);
 
     return (
         <div className="users-container">
-            <h2>Users List</h2>
+            <div className="users-header">
+                <h2>Users List</h2>
+                <button className="add-user-btn" onClick={() => navigate('/home/users/add')}>Add User</button>
+            </div>
+
             {error && <p className="error">{error}</p>}
+
             <table className="users-table">
                 <thead>
                     <tr>
@@ -49,6 +55,8 @@ const Users = () => {
                     ))}
                 </tbody>
             </table>
+
+            {/* Pagination */}
             <div className="pagination">
                 <button onClick={() => setPage(page - 1)} disabled={page === 1}>Prev</button>
                 <span>Page {page} of {totalPages}</span>

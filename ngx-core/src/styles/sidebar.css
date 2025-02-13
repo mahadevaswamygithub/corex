@@ -51,7 +51,8 @@
 
 .sidebar nav ul li a.active,
 .sidebar nav ul li a:hover {
-    background-color: #34495e;
+    background-color: #1abc9c; /* Change to desired hover color */
+    transition: background-color 0.3s ease;
 }
 
 .sidebar nav ul li a .text {
@@ -61,6 +62,11 @@
 
 .sidebar.closed nav ul li a .text {
     display: none; /* Hide text when sidebar is closed */
+}
+
+.sidebar nav ul li a:hover .text,
+.sidebar nav ul li a:hover .icon {
+    color: #ffffff; /* Change text and icon color on hover */
 }
 
 /* Logout button */

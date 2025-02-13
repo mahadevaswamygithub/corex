@@ -1,4 +1,3 @@
-// App.js
 import React, { useEffect } from 'react';
 import { BrowserRouter as Router, Route, Routes, Navigate } from 'react-router-dom';
 import HomeLayout from './components/HomeLayout';
@@ -7,6 +6,7 @@ import Users from './pages/Users';
 import ActivityLog from './pages/ActivityLog';
 import Login from './pages/Login';
 import UserDetails from './pages/UserDetails';
+import AddUser from './pages/AddUser'; // Import AddUser page
 import { isTokenExpired, getTokenExpiryTime } from './utils/auth';
 
 // ProtectedRoute component to check authentication
@@ -57,6 +57,7 @@ function App() {
                 >
                     <Route index element={<Dashboard />} />
                     <Route path="users" element={<Users />} />
+                    <Route path="users/add" element={<AddUser />} /> {/* ✅ Add this line */}
                     <Route path="users/:id" element={<UserDetails />} />
                     <Route path="activity-log" element={<ActivityLog />} />
                 </Route>
